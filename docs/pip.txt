@@ -1,0 +1,33 @@
+﻿
+pip cache purge
+
+pip freeze > requirements.txt
+pip install -r requirements.txt
+
+
+PYTHONUTF8=1
+
+
+# up
+python -m pip install --upgrade starlette
+
+
+# dev
+python -m pip install starlette
+python -m pip install loguru httpx2
+python -m pip install "psycopg[binary]"
+python -m pip install "sqlalchemy[asyncio]"
+python -m pip install python-dotenv
+python -m pip install uvicorn
+
+python -m pip install jsonschema
+
+python -m pip install pytest
+
+python -m pip install cryptography
+
+# prod
+python -m pip install gunicorn
+
+
+
