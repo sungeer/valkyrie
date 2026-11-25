@@ -1,4 +1,8 @@
 import uvicorn
+from dotenv import load_dotenv
+
+env_file = '/srv/envs/valkyrie.env'
+load_dotenv(env_file)
 
 log_config = {
     'version': 1,
