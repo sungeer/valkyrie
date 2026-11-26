@@ -11,22 +11,14 @@ def list_users(limit: int = 10):
     }
 
     resp = httpx.post(url, json=data, timeout=5.0, verify=False)
-    resp.raise_for_status()  # HTTP 层错误（4xx/5xx）直接抛出
     data = resp.json()
-
-    # 业务层失败（success 为假）同样视为调用失败
-    if not data.get('success'):
-        code = data.get('code')
-        err_msg = data.get('message')
-        raise RuntimeError(f'biz call failed, code={code}, error={err_msg}')
 
     return data
 
 
 def main():
     data = list_users(5)
-    users = data['data'] or []
-    return users
+    return data
 
 
 if __name__ == '__main__':

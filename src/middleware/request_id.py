@@ -22,6 +22,9 @@ class RequestIDMiddleware(BaseHTTPMiddleware):
         try:
             response = await call_next(request)
             status = response.status_code
+        except Exception:
+            status = 500
+            raise
         finally:
             cost_ms = (time.perf_counter() - start) * 1000
 

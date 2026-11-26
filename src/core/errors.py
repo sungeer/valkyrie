@@ -4,6 +4,7 @@ from starlette.requests import ClientDisconnect
 
 from src.utils.error_codes import ErrCode
 from src.utils.api_errors import ApiError
+from src.core.ctx import request_id_var
 from src.core.response import fail
 
 
@@ -49,9 +50,15 @@ async def server_error(request, exc):  # noqa
     http_code = 500
     code = ErrCode.SERVER_ERROR
 
-    logger.exception('[server error]path={}', request.url.path)
-
     request_id = getattr(request.state, 'request_id', None)
+
+    token = request_id_var.set(request_id) if request_id else None
+    try:
+        logger.exception('[server error]path={}', request.url.path)
+    finally:
+        if token is not None:
+            request_id_var.reset(token)
+
     headers = {'X-Request-ID': request_id} if request_id else None
     return fail(err_msg, http_code, code, headers)
 
