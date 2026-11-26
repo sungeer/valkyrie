@@ -51,8 +51,8 @@ async def server_error(request, exc):  # noqa
 
     logger.exception('[server error]path={}', request.url.path)
 
-    request_id = request.state.request_id
-    headers = {'X-Request-ID': request_id}
+    request_id = getattr(request.state, 'request_id', None)
+    headers = {'X-Request-ID': request_id} if request_id else None
     return fail(err_msg, http_code, code, headers)
 
 

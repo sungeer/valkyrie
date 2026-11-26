@@ -12,7 +12,7 @@ class RequestIDMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request, call_next):
         request_id: str = uuid.uuid4().hex[:18]
 
-        request_id_var.set(request_id)
+        token = request_id_var.set(request_id)
 
         request.state.request_id = request_id
 
@@ -30,6 +30,8 @@ class RequestIDMiddleware(BaseHTTPMiddleware):
                     '[slow request] method={}, path={}, status={}, cost={:.0f}ms',
                     request.method, request.url.path, status, cost_ms,
                 )
+
+            request_id_var.reset(token)
 
         response.headers['X-Request-ID'] = request_id
         return response

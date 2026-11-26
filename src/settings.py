@@ -4,7 +4,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from sqlalchemy.engine import URL
 
-VERSION = '26.1125.1741'
+VERSION = '26.1126.1731'
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,7 +37,7 @@ JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')  # JWT 签名密钥
 ORIGINS = os.getenv('ORIGINS').split(',')
 
 DB_HOST = os.getenv('DB_HOST')
-DB_PORT = int(os.getenv('DB_PORT', default='3306'))
+DB_PORT = int(os.getenv('DB_PORT', default='5432'))
 DB_USER = os.getenv('DB_USER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_NAME = os.getenv('DB_NAME')

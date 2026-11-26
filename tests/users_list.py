@@ -16,7 +16,9 @@ def list_users(limit: int = 10):
 
     # 业务层失败（success 为假）同样视为调用失败
     if not data.get('success'):
-        raise RuntimeError(f'business call failed: error={data.get("error")}')
+        code = data.get('code')
+        err_msg = data.get('message')
+        raise RuntimeError(f'biz call failed, code={code}, error={err_msg}')
 
     return data
 
