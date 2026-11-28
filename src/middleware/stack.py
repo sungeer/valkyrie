@@ -3,9 +3,11 @@ from starlette.middleware.cors import CORSMiddleware
 
 from src import settings
 from src.middleware import request_id
+from src.middleware import slow_request
 
 middlewares = [
     Middleware(request_id.RequestIDMiddleware),  # 最外层 最先执行
+    Middleware(slow_request.SlowRequestMiddleware),
     Middleware(
         CORSMiddleware,
         allow_origins=settings.ORIGINS,  # allow_origins=['*']  # 允许所有来源

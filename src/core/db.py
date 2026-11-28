@@ -19,7 +19,7 @@ class _Engine:
             pool_pre_ping=True,  # 避免拿到失效连接
             connect_args={
                 'connect_timeout': 5,  # 连不上 DB 时 5s 快速失败
-                'options': '-c statement_timeout=60s',
+                'options': '-c statement_timeout=30s',
             },
         )
 
