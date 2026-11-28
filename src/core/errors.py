@@ -54,7 +54,7 @@ async def server_error(request, exc):  # noqa
 
     token = request_id_var.set(request_id) if request_id else None
     try:
-        logger.exception('[server error]path={}', request.url.path)
+        logger.opt(exception=exc).error('[server error] path={}', request.url.path)
     finally:
         if token is not None:
             request_id_var.reset(token)
