@@ -13,7 +13,6 @@ class SlowRequestMiddleware(BaseHTTPMiddleware):
 
         try:
             response = await call_next(request)
-            return response
         finally:
             cost_ms = (time.perf_counter() - start) * 1000
 
@@ -24,3 +23,5 @@ class SlowRequestMiddleware(BaseHTTPMiddleware):
                     response.status_code if response else 500,
                     cost_ms,
                 )
+
+        return response
