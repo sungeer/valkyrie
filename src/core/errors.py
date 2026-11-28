@@ -45,7 +45,7 @@ async def http_error(request, exc):
 
 
 # 内部错误 500
-async def server_error(request, exc):  # noqa
+async def server_error(request, exc):
     err_msg = 'server error'
     http_code = 500
     code = ErrCode.SERVER_ERROR
